@@ -8,4 +8,39 @@ use Illuminate\Database\Eloquent\Model;
 class Reservation extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'first_name',
+        'last_name',
+        'civility',
+        'email',
+        'phone',
+        'country',
+        'guest_status',
+        'email_optin_market',
+        'registration_date_optin_mail',
+        'sms_optin_market',
+        'registration_date_optin_sms',
+        'mail_optin_review',
+        'registration_date_optin_review_mail',
+        'sms_optin_review',
+        'registration_date_optin_review_sms',
+        'company',
+        'professional_email',
+        'professional_phone',
+        'birthdate',
+        'address',
+        'city',
+        'zip',
+        'lang',
+        'has_no_show',
+        'is_blacklisted',
+        'allergies_notes',
+        'allergies_tags',
+        'guest_notes',
+        'guest_tags',
+        'bookings_number_la_montagne',
+        'created_at',
+        'updated_at'
+    ];
 }

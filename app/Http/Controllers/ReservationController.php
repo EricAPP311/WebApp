@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UploadFileRequest;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,8 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        return view('reservation.index');
+        $reservations = Reservation::all();
+        return view('reservation.index', compact('reservations'));
     }
 
     /**
@@ -20,7 +22,26 @@ class ReservationController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            'title' => 'Create Reservation'
+        ];
+        return view('reservation.form', $data);
+    }
+
+    /**
+     * Show the form for uploading a new resource.
+     */
+    public function uploadForm()
+    {
+        return view('reservation.upload');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function import(UploadFileRequest $request)
+    {
+        dd($request->all());
     }
 
     /**
@@ -44,7 +65,11 @@ class ReservationController extends Controller
      */
     public function edit(Reservation $reservation)
     {
-        //
+        $data = [
+            'title' => 'Edit Reservation',
+            'reservation' => $reservation,
+        ];
+        return view('reservation.form', $data);
     }
 
     /**
@@ -60,6 +85,5 @@ class ReservationController extends Controller
      */
     public function destroy(Reservation $reservation)
     {
-        //
     }
 }

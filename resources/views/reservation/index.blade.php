@@ -7,7 +7,15 @@
                 <div class="col-12">
                     <div class="card mb-4">
                         <div class="card-header pb-0">
-                            <h6>Reservation table</h6>
+                            <h6>Reservation Table</h6>
+                            <div class="row mb-2 p-1">
+                                <div class="d-flex">
+                                    <a type="button" href="{{ route('reservation.create') }}"
+                                        class="btn btn-primary btn-sm ms-auto me-2">Create Data</a>
+                                    <a type="button" href="{{ route('reservation.upload') }}"
+                                        class="btn btn-success btn-sm">Import Excel</a>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-body px-0 pt-0 pb-2">
                             <div class="table-responsive p-0">
@@ -38,16 +46,32 @@
                                             <th
                                                 class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                                 Notes</th>
+                                            <th
+                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                Actions
+                                            </th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td colspan="8">
-                                                <div style="text-align: center">
-                                                    <small>Data is empty.</small>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        @forelse ($reservations as $reservation)
+                                            <tr>
+                                                <td>{{ $reservation->first_name . ' ' . $reservation->last_name }}</td>
+                                                <td>{{ $reservation->id }}</td>
+                                                <td>{{ $reservation->created_at }}</td>
+                                                <td>{{ $reservation->phone }}</td>
+                                                <td>{{ $reservation->bookings_number_la_montagne }}</td>
+                                                <td>Phone</td>
+                                                <td>{{ $reservation->guest_notes }}</td>
+                                            </tr>
+                                        @empty
+                                            <tr>
+                                                <td colspan="9">
+                                                    <div style="text-align: center">
+                                                        <small>Data is empty.</small>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforelse
                                     </tbody>
                                 </table>
                             </div>

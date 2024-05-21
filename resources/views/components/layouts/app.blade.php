@@ -35,9 +35,11 @@
     <link href="{{ asset('assets') }}/css/nucleo-svg.css" rel="stylesheet" />
     <!-- CSS Files -->
     <link id="pagestyle" href="{{ asset('assets') }}/css/argon-dashboard.css?v=2.0.4" rel="stylesheet" />
+    @stack('styles')
 </head>
 
 <body class="{{ $bodyClass }}">
+    @include('sweetalert::alert')
     <div class="min-height-300 bg-primary position-absolute w-100"></div>
 
     {{ $slot }}

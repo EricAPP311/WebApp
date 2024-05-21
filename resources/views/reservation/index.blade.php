@@ -1,4 +1,8 @@
 <x-layouts.app bodyClass="g-sidenav-show bg-gray-100" title="Reservation">
+    @push('styles')
+        <link href="{{ asset('assets/vendor/datatable/datatables.min.css') }}" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    @endpush
     <x-layouts.navbars.sidebar activePage="reservation"></x-layouts.navbars.sidebar>
     <main class="main-content position-relative border-radius-lg ">
         <x-layouts.navbars.navbar titlePage="Reservation"></x-layouts.navbars.navbar>
@@ -11,69 +15,114 @@
                             <div class="row mb-2 p-1">
                                 <div class="d-flex">
                                     <a type="button" href="{{ route('reservation.create') }}"
-                                        class="btn btn-primary btn-sm ms-auto me-2">Create Data</a>
+                                        class="btn btn-primary btn-sm ms-auto me-2"><i class="fa fa-plus"></i>
+                                        Create</a>
                                     <a type="button" href="{{ route('reservation.upload') }}"
-                                        class="btn btn-success btn-sm">Import Excel</a>
+                                        class="btn btn-success btn-sm"><i class="fa fa-upload"></i> Upload File</a>
                                 </div>
                             </div>
                         </div>
-                        <div class="card-body px-0 pt-0 pb-2">
-                            <div class="table-responsive p-0">
-                                <table class="table align-items-center mb-0">
-                                    <thead>
-                                        <tr>
-                                            <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                Name</th>
-                                            <th
-                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                                Reservation ID</th>
-                                            <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                Reservation Day</th>
-                                            <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                Phone Number</th>
-                                            <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                number of persons</th>
-                                            <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                Reservation Type</th>
-                                            <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                Birthday</th>
-                                            <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                Notes</th>
-                                            <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                Actions
-                                            </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @forelse ($reservations as $reservation)
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="table-responsive p-2">
+                                    <table class="table table-condensed" id="reservation-table">
+                                        <thead class="table-success">
                                             <tr>
-                                                <td>{{ $reservation->first_name . ' ' . $reservation->last_name }}</td>
-                                                <td>{{ $reservation->id }}</td>
-                                                <td>{{ $reservation->created_at }}</td>
-                                                <td>{{ $reservation->phone }}</td>
-                                                <td>{{ $reservation->bookings_number_la_montagne }}</td>
-                                                <td>Phone</td>
-                                                <td>{{ $reservation->guest_notes }}</td>
+                                                <th
+                                                    class="text-uppercase text-dark text-xxs font-weight-bolder opacity-7">
+                                                    Nom</th>
+                                                <th
+                                                    class="text-uppercase text-dark text-xxs font-weight-bolder opacity-7 ps-2">
+                                                    Reservation ID</th>
+                                                <th
+                                                    class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7">
+                                                    Jour de réservation</th>
+                                                <th
+                                                    class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7">
+                                                    Numéro de téléphone</th>
+                                                <th
+                                                    class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7">
+                                                    Nombre de personnes</th>
+                                                <th
+                                                    class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7">
+                                                    Reservation Type</th>
+                                                <th
+                                                    class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7">
+                                                    date d'anniversaire</th>
+                                                <th
+                                                    class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7">
+                                                    Notes</th>
+                                                <th
+                                                    class="text-center text-uppercase text-dark text-xxs font-weight-bolder opacity-7">
+                                                    Actions
+                                                </th>
                                             </tr>
-                                        @empty
-                                            <tr>
-                                                <td colspan="9">
-                                                    <div style="text-align: center">
-                                                        <small>Data is empty.</small>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        @endforelse
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($reservations as $reservation)
+                                                <tr>
+                                                    <td>
+                                                        <div class="d-flex px-2 py-1">
+                                                            <div class="d-flex flex-column justify-content-center">
+                                                                <h6 class="mb-0 text-sm">
+                                                                    {{ $reservation->first_name . ' ' . $reservation->last_name }}
+                                                                </h6>
+                                                                <p class="text-xs text-dark mb-0">
+                                                                    {{ $reservation->email }}</p>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td class="align-middle text-center">
+                                                        <span
+                                                            class="text-dark text-xs font-weight-bold">{{ $reservation->id }}
+                                                        </span>
+                                                    </td>
+                                                    <td class="align-middle text-center">
+                                                        <span
+                                                            class="text-dark text-xs font-weight-bold">{{ date('d M Y H:i:s', strtotime($reservation->registration_date)) }}
+                                                        </span>
+                                                    </td>
+                                                    <td class="align-middle text-center">
+                                                        <span
+                                                            class="text-dark text-xs font-weight-bold">{{ $reservation->phone }}
+                                                        </span>
+                                                    </td>
+                                                    <td class="align-middle text-center">
+                                                        <span
+                                                            class="text-dark text-xs font-weight-bold">{{ $reservation->bookings_number_la_montagne }}
+                                                        </span>
+                                                    </td>
+                                                    <td class="align-middle text-center">
+                                                        <span
+                                                            class="text-dark text-xs font-weight-bold">{{ $reservation->reservation_type }}</span>
+                                                    </td>
+                                                    <td class="align-middle text-center">
+                                                        <span
+                                                            class="text-dark text-xs font-weight-bold">{{ date('d M Y', strtotime($reservation->birthdate)) }}</span>
+                                                    </td>
+                                                    <td class="align-middle text-center">
+                                                        <span
+                                                            class="text-dark text-xs font-weight-bold">{{ $reservation->notes }}</span>
+                                                    </td>
+                                                    <td class="align-middle">
+                                                        <a href="{{ route('reservation.edit', $reservation->id) }}"
+                                                            type="button"
+                                                            class="btn btn-primary font-weight-bold text-xs"
+                                                            data-toggle="tooltip" data-original-title="Edit user">
+                                                            Edit
+                                                        </a>
+                                                        <a href="{{ route('reservation.destroy', $reservation->id) }}"
+                                                            type="button"
+                                                            class="btn btn-warning font-weight-bold text-xs"
+                                                            data-toggle="tooltip" data-original-title="Edit user">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -83,5 +132,10 @@
         </div>
     </main>
     <x-layouts.plugin title="reservation"></x-layouts.plugin>
-
+    @push('script')
+        <script src="{{ asset('assets/vendor/datatable/datatables.min.js') }}"></script>
+        <script>
+            new DataTable('#reservation-table');
+        </script>
+    @endpush
 </x-layouts.app>

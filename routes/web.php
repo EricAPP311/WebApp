@@ -32,6 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/reservation/update/{reservation}', [ReservationController::class, 'update'])->name('reservation.update');
     Route::get('/reservation/show/{reservation}', [ReservationController::class, 'show'])->name('reservation.show');
     Route::delete('/reservation/delete/{reservation}', [ReservationController::class, 'destroy'])->name('reservation.destroy');
+    Route::get('/reservation/delete/{reservation}', [ReservationController::class, 'destroy'])->name('reservation.destroy');
     Route::get('/reservation/upload', [ReservationController::class, 'uploadForm'])->name('reservation.upload');
     Route::post('/reservation/import', [ReservationController::class, 'import'])->name('reservation.import');
 

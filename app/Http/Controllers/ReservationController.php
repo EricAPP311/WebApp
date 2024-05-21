@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ReservationRequest;
 use App\Http\Requests\UploadFileRequest;
+use App\Imports\ReservationImport;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ReservationController extends Controller
 {
@@ -41,15 +44,19 @@ class ReservationController extends Controller
      */
     public function import(UploadFileRequest $request)
     {
-        dd($request->all());
+        Excel::import(new ReservationImport, $request->file('file_import'));
+        alert()->success('Success', 'Données de réservation importées avec succès!');
+        return redirect()->route('reservation.index');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ReservationRequest $request)
     {
-        //
+        Reservation::create($request->all());
+        alert()->success('Success', 'Les données de réservation ont été créées avec succès!');
+        return redirect()->route('reservation.index');
     }
 
     /**
@@ -75,9 +82,11 @@ class ReservationController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Reservation $reservation)
+    public function update(ReservationRequest $request, Reservation $reservation)
     {
-        //
+        $reservation->update($request->all());
+        alert()->success('Success', 'Les données de réservation ont été mises à jour avec succès!');
+        return redirect()->route('reservation.index');
     }
 
     /**
@@ -85,5 +94,8 @@ class ReservationController extends Controller
      */
     public function destroy(Reservation $reservation)
     {
+        $reservation->delete();
+        alert()->success('Success', 'Les données de réservation ont été supprimées avec succès!');
+        return redirect()->back();
     }
 }

@@ -16,10 +16,11 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('civility')->nullable();
-            $table->string('email')->nullable();
-            $table->string('phone')->nullable();
+            $table->string('email');
+            $table->string('phone');
             $table->string('country')->nullable();
             $table->string('guest_status')->nullable();
+            $table->dateTime('registration_date')->nullable();
             $table->text('email_optin_market')->nullable();
             $table->date('registration_date_optin_mail')->nullable();
             $table->text('sms_optin_market')->nullable();
@@ -38,10 +39,12 @@ return new class extends Migration
             $table->string('lang')->nullable();
             $table->string('has_no_show')->nullable();
             $table->string('is_blacklisted')->nullable();
+            $table->string('reservation_type')->nullable();
             $table->text('allergies_notes')->nullable();
             $table->string('allergies_tags')->nullable();
             $table->text('guest_notes')->nullable();
             $table->string('guest_tags')->nullable();
+            $table->text('notes')->nullable();
             $table->string('bookings_number_la_montagne')->nullable();
             $table->timestamps();
         });

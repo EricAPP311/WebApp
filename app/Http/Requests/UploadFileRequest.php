@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
 
 class UploadFileRequest extends FormRequest
 {
@@ -22,7 +23,14 @@ class UploadFileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'file_import' => 'required|file|mimes:xlsx,csv|max:2048'
+            'file_import' => 'required|file|mimes:csv,txt,xlsx|max:2048'
         ];
+    }
+
+    public function withValidator(Validator $validator)
+    {
+        if ($validator->fails()) {
+            alert()->error('Error', "Les données n'ont pas été renseignées correctement.");
+        }
     }
 }

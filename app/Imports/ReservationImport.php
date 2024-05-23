@@ -23,6 +23,16 @@ class ReservationImport implements ToCollection, WithHeadingRow, WithValidation
             $updated_at = $collection['updated_at'] !== null || $collection['updated_at'] !== '-' ? DateTime::createFromFormat('d/m/Y H:i', $collection['updated_at'])->format('Y-m-d H:i:s') : null;
             $created_at = $collection['created_by'] !== null || $collection['created_by'] !== '-' ? DateTime::createFromFormat('d/m/Y H:i', $collection['created_by'])->format('Y-m-d H:i:s') : null;
 
+            $oldData = Reservation::where('first_name', $collection['first_name'])
+                ->where('last_name', $collection['last_name'])
+                ->where('phone', $collection['phone'])
+                ->where('email', $collection['email'])
+                ->first();
+
+            if ($oldData) {
+                continue;
+            }
+
             Reservation::create([
                 "first_name" => $collection['first_name'],
                 "last_name" => $collection['last_name'],

@@ -8,7 +8,8 @@
                         <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
                             <div class="card card-plain">
                                 <div class="card-header pb-0 text-start">
-                                    <h4 class="font-weight-bolder">Sign In</h4>
+                                    <h4 class="font-weight-bolder">
+                                        {{ request()->routeIs('admin.login') ? 'Admin ' : 'User ' }}| Sign In</h4>
                                     <p class="mb-0">Enter your email and password to sign in</p>
                                 </div>
                                 <div class="card-body">
@@ -47,12 +48,14 @@
                                     </form>
                                 </div>
                                 <div class="card-footer text-center pt-0 px-lg-2 px-1">
-                                    <p class="mb-4 text-sm mx-auto">
-                                        Don't have an account?
-                                        <a href="{{ route('register') }}"
-                                            class="text-primary text-gradient font-weight-bold">Sign
-                                            up</a>
-                                    </p>
+                                    @if (request()->routeIs('login'))
+                                        <p class="mb-4 text-sm mx-auto">
+                                            Don't have an account?
+                                            <a href="{{ route('register') }}"
+                                                class="text-primary text-gradient font-weight-bold">Sign
+                                                up</a>
+                                        </p>
+                                    @endif
                                 </div>
                             </div>
                         </div>

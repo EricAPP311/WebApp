@@ -98,4 +98,9 @@ class ReservationController extends Controller
         alert()->success('Success', 'Les données de réservation ont été supprimées avec succès!');
         return redirect()->back();
     }
+
+    public function landing()
+    {
+        return view('landing-page.reservation');
+    }
 }

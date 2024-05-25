@@ -65,11 +65,14 @@
                                 style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/signin-ill.jpg');
       background-size: cover;">
                                 <span class="mask bg-gradient-primary opacity-6"></span>
-                                <h4 class="mt-5 text-white font-weight-bolder position-relative">"Seamless integration is
-                                    the new standard"</h4>
-                                <p class="text-white position-relative">The easier the writing appears, the more effort the
-                                    writer actually puts into the process of creating a web system to import Excel into the
-                                    database.</p>
+                                <div class="mt-5 mb-3">
+                                    <a href="{{ route('landing.home') }}" role="button">
+                                        <img src="{{ asset('assets/landing') }}/img/brand/artech-white.png"
+                                            style="width: 100%;" alt="image brand" class="bg-gradient-primary opacity-6">
+                                    </a>
+                                </div>
+                                <p class="text-white position-relative">Please log in to access Artech Design HubCenter and
+                                    start managing your reservations easily and efficiently</p>
                             </div>
                         </div>
                     </div>

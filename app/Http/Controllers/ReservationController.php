@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ReservationRequest;
-use App\Http\Requests\UploadFileRequest;
-use App\Imports\ReservationImport;
+use Carbon\Carbon;
 use App\Models\Reservation;
 use Illuminate\Http\Request;
+use App\Imports\ReservationImport;
+use App\Http\Controllers\Controller;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Requests\UploadFileRequest;
+use App\Http\Requests\ReservationRequest;
 
 class ReservationController extends Controller
 {
@@ -54,9 +56,17 @@ class ReservationController extends Controller
      */
     public function store(ReservationRequest $request)
     {
+        $request['registration_date'] = Carbon::parse($request->input('registration_date'))->format('Y-m-d H:i:s');
+        $request['birthdate'] = Carbon::parse($request->input('birthdate'))->format('Y-m-d');
         Reservation::create($request->all());
         alert()->success('Success', 'Les données de réservation ont été créées avec succès!');
-        return redirect()->route('reservation.index');
+
+        if (request()->routeIs('landing.reservation-store')) {
+            $route = 'landing.reservation';
+        } else {
+            $route = 'reservation.index';
+        }
+        return redirect()->route($route);
     }
 
     /**
@@ -84,6 +94,8 @@ class ReservationController extends Controller
      */
     public function update(ReservationRequest $request, Reservation $reservation)
     {
+        $request['registration_date'] = Carbon::parse($request->input('registration_date'))->format('Y-m-d H:i:s');
+        $request['birthdate'] = Carbon::parse($request->input('birthdate'))->format('Y-m-d');
         $reservation->update($request->all());
         alert()->success('Success', 'Les données de réservation ont été mises à jour avec succès!');
         return redirect()->route('reservation.index');
@@ -101,6 +113,10 @@ class ReservationController extends Controller
 
     public function landing()
     {
-        return view('landing-page.reservation');
+
+        $data = [
+            'title' => 'Reservation Form'
+        ];
+        return view('landing-page.reservation', $data);
     }
 }

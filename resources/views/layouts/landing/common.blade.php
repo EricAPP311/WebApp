@@ -21,7 +21,7 @@ Coded by www.creative-tim.com
     <link rel="apple-touch-icon" sizes="76x76" href="{{ asset('assets/landing') }}/img/apple-icon.png">
     <link rel="icon" type="image/png" href="{{ asset('assets/landing') }}/img/favicon.png">
     <title>
-        {{ config('app.name', 'Laravel') }}
+        {{ config('app.name', 'Laravel') }} - @yield('title')
     </title>
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
@@ -34,9 +34,11 @@ Coded by www.creative-tim.com
     <link href="{{ asset('assets/landing') }}/css/nucleo-svg.css" rel="stylesheet" />
     <!-- CSS Files -->
     <link href="{{ asset('assets/landing') }}/css/argon-design-system.css?v=1.2.2" rel="stylesheet" />
+    @stack('style')
 </head>
 
 <body class="index-page">
+    @include('sweetalert::alert')
     <!-- Navbar -->
     @include('layouts.landing.navbar')
     <!-- End Navbar -->
@@ -49,7 +51,6 @@ Coded by www.creative-tim.com
     <script src="{{ asset('assets/landing') }}/js/plugins/perfect-scrollbar.jquery.min.js"></script>
     <!--  Plugin for Switches, full documentation here: http://www.jque.re/plugins/version3/bootstrap.switch/ -->
     <script src="{{ asset('assets/landing') }}/js/plugins/bootstrap-switch.js"></script>
-    <!--  Plugin for the Sliders, full documentation here: http://refreshless.com/nouislider/ -->
     <script src="{{ asset('assets/landing') }}/js/plugins/nouislider.min.js" type="text/javascript"></script>
     <script src="{{ asset('assets/landing') }}/js/plugins/moment.min.js"></script>
     <script src="{{ asset('assets/landing') }}/js/plugins/datetimepicker.js" type="text/javascript"></script>
@@ -76,6 +77,7 @@ Coded by www.creative-tim.com
                 application: "argon-design-system-pro"
             });
     </script>
+    @stack('script')
 </body>
 
 </html>

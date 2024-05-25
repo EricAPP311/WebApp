@@ -7,9 +7,14 @@
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-5 text-center mx-auto">
-                        <h1 class="text-white mb-2 mt-2">Welcome!</h1>
-                        <p class="text-lead text-white">Utilize these forms for easy login or account creation on your web
-                            app, tailored for effortless Excel import into the database. </p>
+                        <div class="mb-2 mt-2">
+                            <a href="{{ route('landing.home') }}" role="button">
+                                <img src="{{ asset('assets/landing') }}/img/brand/artech-white.png" style="width: 100%;"
+                                    alt="image brand">
+                            </a>
+                        </div>
+                        <p class="text-lead text-white">Sign up now to unlock the full potential of Artech Design HubCenter
+                            and streamline your reservation management process.</p>
                     </div>
                 </div>
             </div>

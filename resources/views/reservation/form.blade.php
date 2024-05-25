@@ -28,7 +28,7 @@
                                                             <input type="text" name="first_name"
                                                                 class="form-control @error('first_name') is-invalid @enderror"
                                                                 placeholder="Entrez ici votre prénom."
-                                                                value="{{ $reservation->first_name ?? '' }}">
+                                                                value="{{ $reservation->first_name ?? old('first_name') }}">
                                                             @error('first_name')
                                                                 <div class="invalid-feedback">
                                                                     <small>
@@ -44,7 +44,7 @@
                                                             <input type="text" name="last_name"
                                                                 class="form-control @error('last_name') is-invalid @enderror"
                                                                 placeholder="Entrez le nom de famille ici."
-                                                                value="{{ $reservation->last_name ?? '' }}">
+                                                                value="{{ $reservation->last_name ?? old('last_name') }}">
                                                             @error('last_name')
                                                                 <div class="invalid-feedback">
                                                                     <small>
@@ -62,7 +62,7 @@
                                             <input type="text" name="email"
                                                 class="form-control @error('email') is-invalid @enderror"
                                                 placeholder="Entrez l'e-mail ici."
-                                                value="{{ $reservation->email ?? '' }}">
+                                                value="{{ $reservation->email ?? old('email') }}">
                                             @error('email')
                                                 <div class="invalid-feedback">
                                                     <small>
@@ -76,7 +76,7 @@
                                             <input type="tel" name="phone"
                                                 class="form-control @error('phone') is-invalid @enderror"
                                                 placeholder="Entrez le numéro de téléphone ici."
-                                                value="{{ $reservation->phone ?? '' }}">
+                                                value="{{ $reservation->phone ?? old('phone') }}">
                                             @error('phone')
                                                 <div class="invalid-feedback">
                                                     <small>
@@ -87,10 +87,11 @@
                                         </div>
                                         <div class="row mb-3">
                                             <label for="registration_date">Jour de réservation</label>
-                                            <input type="date" name="registration_date"
-                                                class="form-control @error('registration_date') is-invalid @enderror"
-                                                placeholder="Entrez la date d'inscription ici"
-                                                value="{{ $reservation->registration_date ?? '' }}">
+                                            <input
+                                                class="flatpickr datetimepicker form-control @error('registration_date') is-invalid @enderror"
+                                                type="text" placeholder="dd-MM-yyyy HH:mm:ss"
+                                                name="registration_date"
+                                                value="{{ isset($reservation->registration_date) ? date('d-m-Y H:i:s', strtotime($reservation->registration_date)) : old('registration_date') }}">
                                             @error('registration_date')
                                                 <div class="invalid-feedback">
                                                     <small>
@@ -103,10 +104,10 @@
                                     <div class="col-md-5">
                                         <div class="row mb-3">
                                             <label for="birthdate">Date d'anniversaire</label>
-                                            <input type="date" name="birthdate"
-                                                class="form-control @error('birthdate') is-invalid @enderror"
-                                                placeholder="Entrez l'anniversaire ici."
-                                                value="{{ $reservation->birthdate ?? '' }}">
+                                            <input type="text" name="birthdate"
+                                                class="form-control flatpickr datepicker @error('birthdate') is-invalid @enderror"
+                                                placeholder="dd-MM-yyyy"
+                                                value="{{ isset($reservation->birthdate) ? date('d-m-Y', strtotime($reservation->birthdate)) : old('birthdate') }}">
                                             @error('birthdate')
                                                 <div class="invalid-feedback">
                                                     <small>
@@ -121,7 +122,7 @@
                                             <input type="number" name="bookings_number_la_montagne"
                                                 class="form-control @error('bookings_number_la_montagne') is-invalid @enderror"
                                                 placeholder="Entrez ici le nombre de personnes"
-                                                value="{{ $reservation->bookings_number_la_montagne ?? '' }}">
+                                                value="{{ $reservation->bookings_number_la_montagne ?? old('bookings_number_la_montagne') }}">
                                             @error('bookings_number_la_montagne')
                                                 <div class="invalid-feedback">
                                                     <small>
@@ -160,7 +161,7 @@
                                             <label for="notes">Notes</label>
                                             <textarea name="notes" class="form-control @error('notes') is-invalid @enderror" cols="30" rows="3"
                                                 placeholder="Entrez des notes ici.">
-                                                {{ $reservation->notes ?? '' }}
+                                                {{ $reservation->notes ?? old('notes') }}
                                             </textarea>
                                             @error('notes')
                                                 <div class="invalid-feedback">
@@ -187,5 +188,20 @@
         </div>
     </main>
     <x-layouts.plugin title="{{ strtolower($title) }}"></x-layouts.plugin>
+
+    @push('script')
+        <script src="{{ asset('assets/landing') }}/js/plugins/datetimepicker.js" type="text/javascript"></script>
+        <script>
+            flatpickr('.datetimepicker', {
+                enableTime: true,
+                dateFormat: "d-m-Y H:i:s",
+            });
+
+            flatpickr('.datepicker', {
+                // enableTime: true,
+                dateFormat: "d-m-Y",
+            });
+        </script>
+    @endpush
 
 </x-layouts.app>

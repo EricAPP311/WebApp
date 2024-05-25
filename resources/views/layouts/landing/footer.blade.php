@@ -35,13 +35,13 @@
                     &copy;
                     <script>
                         document.write(new Date().getFullYear())
-                    </script> <a href="" target="_blank">Creative Tim</a>.
+                    </script> <a href="/">Artech Design HubCenter</a>.
                 </div>
             </div>
             <div class="col-md-6">
                 <ul class="nav nav-footer justify-content-end">
                     <li class="nav-item">
-                        <a href="" class="nav-link" target="_blank">Creative Tim</a>
+                        <a href="/" class="nav-link">Artech Design HubCenter</a>
                     </li>
                     <li class="nav-item">
                         <a href="" class="nav-link" target="_blank">About Us</a>

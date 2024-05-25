@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Services\WidgetChartService;
 
 class HomeController extends Controller
 {
@@ -11,7 +13,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('landing-page.home');
+        $services = new WidgetChartService;
+        $data = $services->getData();
+        return view('landing-page.home', compact('data'));
     }
 
     /**

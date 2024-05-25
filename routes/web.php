@@ -28,6 +28,7 @@ use App\Http\Controllers\HomeController;
 Route::get('/', [HomeController::class, 'index'])->name('landing.home');
 Route::get('/admin/login', [AuthenticatedSessionController::class, 'create'])->name('admin.login');
 Route::get('/reservation', [ReservationController::class, 'landing'])->name('landing.reservation');
+Route::post('/reservation/store', [ReservationController::class, 'store'])->name('landing.reservation-store');
 
 Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('dashboard');

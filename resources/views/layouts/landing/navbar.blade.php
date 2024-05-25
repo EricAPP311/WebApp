@@ -1,7 +1,7 @@
 <nav id="navbar-main" class="navbar navbar-main navbar-expand-lg bg-white navbar-light position-sticky top-0 shadow py-2">
     <div class="container">
         <a class="navbar-brand mr-lg-5" href="/">
-            <img src="{{ asset('assets/landing') }}/img/brand/blue.png">
+            <img src="{{ asset('assets/landing') }}/img/brand/artech-blue.png" style="width: 100%" alt="brand image">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar_global"
             aria-controls="navbar_global" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="col-6 collapse-brand">
                         <a href="/">
-                            <img src="{{ asset('assets/landing') }}/img/brand/blue.png">
+                            <img src="{{ asset('assets/landing') }}/img/brand/artech-blue.png">
                         </a>
                     </div>
                     <div class="col-6 collapse-close">
@@ -28,7 +28,7 @@
             <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
                 <li class="nav-item {{ request()->routeIs('landing.home') ? 'active' : '' }}">
                     <a href="{{ route('landing.home') }}" class="nav-link" role="button">
-                        <i class="ni ni-ui-04 d-lg-none"></i>
+                        <i class="ni ni-shop d-lg-none"></i>
                         <span class="nav-link-inner--text">Home</span>
                     </a>
                 </li>

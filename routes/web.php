@@ -1,11 +1,12 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +19,17 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-// Route::get('/', function () {
-//     return redirect('login');
-// });
+Route::get('common', function () {
+    if (Auth::user()) {
+        $roles = Auth::user()->getRoles();
+        if ($roles[0] == "user") {
+            return redirect()->route('landing.home');
+        } else {
+            return redirect()->route('dashboard');
+        }
+    }
+    return redirect()->route('login');
+})->name('common');
 
 // Route::get('/', function () {
 //     return view('landing-page.home');

@@ -158,9 +158,9 @@
                                             @enderror
                                         </div>
                                         <div class="row mb-3">
-                                            <label for="notes">Notes</label>
-                                            <textarea name="notes" class="form-control @error('notes') is-invalid @enderror" cols="30" rows="3"
-                                                placeholder="Entrez des notes ici.">
+                                            <label for="exampleFormControlTextarea1">Notes</label>
+                                            <textarea name="notes" id="exampleFormControlTextarea1" class="form-control @error('notes') is-invalid @enderror"
+                                                rows="3" placeholder="Entrez des notes ici.">
                                                 {{ $reservation->notes ?? old('notes') }}
                                             </textarea>
                                             @error('notes')

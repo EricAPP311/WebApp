@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Reservation;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Services\WidgetChartService;
@@ -15,54 +16,11 @@ class HomeController extends Controller
     {
         $services = new WidgetChartService;
         $data = $services->getData();
-        return view('landing-page.home', compact('data'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $lastRegisChart = $services->getLastRegistrationChart();
+        $lastRegister = Reservation::orderBy('registration_date', 'DESC')->limit(4)->get();
+        $recentBirthday = Reservation::orderBy('birthdate', 'DESC')->limit(6)->get();
+        $upcomming = $services->getBirthday();
+        // dd($upcomming['threeMonths']);
+        return view('landing-page.home', compact('data', 'lastRegisChart', 'lastRegister', 'recentBirthday', 'upcomming'));
     }
 }

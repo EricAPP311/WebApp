@@ -40,22 +40,37 @@
                 </li>
             </ul>
             <ul class="navbar-nav align-items-lg-center ml-lg-auto">
-                <li class="nav-item">
-                    <a class="btn btn-outline-primary" href="{{ route('login') }}" target="_blank">
-                        <span class="btn-inner--icon">
-                            <i class="fa fa-sign-in"></i>
-                        </span>
-                        <span class="nav-link-inner--text">Login</span>
-                    </a>
-                </li>
-                <li class="nav-item d-none d-lg-block">
-                    <a href="{{ route('admin.login') }}" target="_blank" class="btn btn-primary btn-icon">
-                        <span class="btn-inner--icon">
-                            <i class="fa fa-user"></i>
-                        </span>
-                        <span class="nav-link-inner--text">Admin</span>
-                    </a>
-                </li>
+                @if (Auth::user())
+                    <form method="POST" action="{{ route('logout') }}" class="d-none" id="logout-form">
+                        @csrf
+                    </form>
+                    <li class="nav-item">
+                        <a class="btn btn-outline-primary" href="javascript:;">
+                            <span class="btn-inner--icon">
+                                <i class="fa fa-sign-out"></i>
+                            </span>
+                            <span class="nav-link-inner--text"
+                                onclick="event.preventDefault();document.getElementById('logout-form').submit();">Logout</span>
+                        </a>
+                    </li>
+                @else
+                    <li class="nav-item">
+                        <a class="btn btn-outline-primary" href="{{ route('login') }}">
+                            <span class="btn-inner--icon">
+                                <i class="fa fa-sign-in"></i>
+                            </span>
+                            <span class="nav-link-inner--text">Login</span>
+                        </a>
+                    </li>
+                    <li class="nav-item d-none d-lg-block">
+                        <a href="{{ route('admin.login') }}" target="_blank" class="btn btn-primary btn-icon">
+                            <span class="btn-inner--icon">
+                                <i class="fa fa-user"></i>
+                            </span>
+                            <span class="nav-link-inner--text">Admin</span>
+                        </a>
+                    </li>
+                @endif
             </ul>
         </div>
     </div>

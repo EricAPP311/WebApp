@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Reservation extends Model
 {
@@ -46,4 +47,21 @@ class Reservation extends Model
         'created_at',
         'updated_at'
     ];
+
+    protected $casts = [
+        'birthdate' => 'date',
+    ];
+
+    // Get the next birthday date in the current year or the next year
+    public function getNextBirthdayAttribute()
+    {
+        $birthDate = Carbon::parse($this->birthdate);
+        $thisYearBirthday = $birthDate->copy()->year(Carbon::now()->year);
+
+        if ($thisYearBirthday->isPast()) {
+            $thisYearBirthday->addYear();
+        }
+
+        return $thisYearBirthday;
+    }
 }

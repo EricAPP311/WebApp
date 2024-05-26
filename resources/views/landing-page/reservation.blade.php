@@ -142,9 +142,9 @@
                                         @enderror
                                     </div>
                                     <div class="form-group mb-3">
-                                        <label for="notes">Notes</label>
-                                        <textarea name="notes" class="form-control @error('notes') is-invalid @enderror" rows="3"
-                                            placeholder="Entrez des notes ici.">
+                                        <label for="exampleFormControlTextarea1">Notes</label>
+                                        <textarea name="notes" id="exampleFormControlTextarea1" class="form-control @error('notes') is-invalid @enderror"
+                                            rows="3" placeholder="Entrez des notes ici.">
                                             {{ old('notes') }}
                                         </textarea>
                                         @error('notes')

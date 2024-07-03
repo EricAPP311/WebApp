@@ -26,7 +26,7 @@
                             <div class="row">
                                 <div class="table-responsive p-2">
                                     <table class="table table-condensed" id="reservation-table">
-                                        <thead class="table-success">
+                                        <thead class="table-success" style="color: #dde1e9;">
                                             <tr>
                                                 <th
                                                     class="text-uppercase text-dark text-xxs font-weight-bolder opacity-7">
@@ -104,19 +104,26 @@
                                                         <span
                                                             class="text-dark text-xs font-weight-bold">{{ $reservation->notes }}</span>
                                                     </td>
-                                                    <td class="align-middle">
-                                                        <a href="{{ route('reservation.edit', $reservation->id) }}"
-                                                            type="button"
-                                                            class="btn btn-primary font-weight-bold text-xs"
-                                                            data-toggle="tooltip" data-original-title="Edit user">
-                                                            Edit
-                                                        </a>
-                                                        <a href="{{ route('reservation.destroy', $reservation->id) }}"
-                                                            type="button"
-                                                            class="btn btn-warning font-weight-bold text-xs"
-                                                            data-toggle="tooltip" data-original-title="Edit user">
-                                                            <i class="fa fa-trash"></i>
-                                                        </a>
+                                                    <td>
+                                                        <div class="d-flex justify-content-center gap-2 button-group">
+                                                            <a href="{{ route('reservation.edit', $reservation->id) }}"
+                                                                type="button"
+                                                                class="btn btn-primary shadow btn-xs sharp me-1 text-xs"
+                                                                data-toggle="tooltip" data-original-title="Edit User">
+                                                                <i class="fa fa-pencil"></i>
+                                                            </a>
+                                                            <form
+                                                                action="{{ route('reservation.destroy', $reservation->id) }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit"
+                                                                    class="btn btn-warning shadow btn-xs sharp me-1"
+                                                                    data-toggle="tooltip"
+                                                                    data-original-title="Delete User">
+                                                                    <i class="fa fa-trash"></i>
+                                                            </form>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             @endforeach

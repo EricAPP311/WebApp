@@ -73,7 +73,7 @@ class ReservationController extends Controller
         // Debugging point
         if (captcha_check($request->captcha) == false) {
             alert()->error('Error', "Le captcha que vous avez saisi est incorrect.");
-            return back();
+            return redirect()->back()->withInput();
         }
         // Format the dates
         $request['registration_date'] = Carbon::parse($request->input('registration_date'))->format('Y-m-d H:i:s');

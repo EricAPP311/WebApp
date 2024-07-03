@@ -87,7 +87,7 @@
                                         </div>
                                         <div class="row mb-3">
                                             <label for="birthdate">Date d'anniversaire</label>
-                                            <input type="text" name="birthdate"
+                                            <input type="text" name="birthdate" id="birthdate"
                                                 class="form-control flatpickr datepicker @error('birthdate') is-invalid @enderror"
                                                 placeholder="dd-MM-yyyy"
                                                 value="{{ isset($reservation->birthdate) ? date('d-m-Y', strtotime($reservation->birthdate)) : old('birthdate') }}">
@@ -106,7 +106,7 @@
                                             <input
                                                 class="flatpickr datetimepicker form-control @error('registration_date') is-invalid @enderror"
                                                 type="text" placeholder="dd-MM-yyyy HH:mm:ss"
-                                                name="registration_date"
+                                                name="registration_date" id="registration_date"
                                                 value="{{ isset($reservation->registration_date) ? date('d-m-Y H:i:s', strtotime($reservation->registration_date)) : old('registration_date') }}">
                                             @error('registration_date')
                                                 <div class="invalid-feedback">
@@ -136,18 +136,26 @@
                                             <select name="reservation_type" id="reservation_type"
                                                 class="form-control @error('reservation_type') is-invalid @enderror">
                                                 @if (empty($reservation))
-                                                    <option value="" selected>Sélectionnez-en un</option>
+                                                    <option value=""
+                                                        {{ old('reservation_type') == null ? 'selected' : '' }}>
+                                                        Sélectionnez-en un</option>
+                                                    <option value="Phone"
+                                                        {{ old('reservation_type') == 'Phone' ? 'selected' : '' }}>
+                                                        Phone</option>
+                                                    <option value="Website"
+                                                        {{ old('reservation_type') == 'Website' ? 'selected' : '' }}>
+                                                        Website</option>
                                                 @elseif (isset($reservation))
-                                                    @if ($reservation->reservation_type === null)
-                                                        <option value="" selected>Sélectionnez-en un</option>
-                                                    @endif
+                                                    <option value=""
+                                                        {{ $reservation->reservation_type === null ? 'selected' : '' }}>
+                                                        Sélectionnez-en un</option>
+                                                    <option value="Phone"
+                                                        {{ isset($reservation) ? ($reservation->reservation_type === 'Phone' ? 'selected' : '') : '' }}>
+                                                        Phone</option>
+                                                    <option value="Website"
+                                                        {{ isset($reservation) ? ($reservation->reservation_type === 'Website' ? 'selected' : '') : '' }}>
+                                                        Website</option>
                                                 @endif
-                                                <option value="Phone"
-                                                    {{ isset($reservation) ? ($reservation->reservation_type === 'Phone' ? 'selected' : '') : '' }}>
-                                                    Phone</option>
-                                                <option value="Website"
-                                                    {{ isset($reservation) ? ($reservation->reservation_type === 'Website' ? 'selected' : '') : '' }}>
-                                                    Website</option>
                                             </select>
                                             @error('reservation_type')
                                                 <div class="invalid-feedback">
@@ -200,6 +208,38 @@
             flatpickr('.datepicker', {
                 // enableTime: true,
                 dateFormat: "d-m-Y",
+            });
+
+            document.addEventListener('DOMContentLoaded', function() {
+                document.getElementById('registration_date').addEventListener('input', function() {
+                    var value = this.value;
+
+                    // Memisahkan tanggal dan waktu
+                    var [datePart, timePart] = value.split(' ');
+
+                    // Memisahkan hari, bulan, dan tahun
+                    var [day, month, year] = datePart.split('-').map(Number);
+
+                    // Memisahkan jam, menit, dan detik
+                    var [hours, minutes, seconds] = timePart.split(':').map(Number);
+
+                    // Membuat objek Date dari komponen tanggal dan waktu
+                    var registrationDate = new Date(year, month - 1, day, hours, minutes, seconds);
+
+                    // Menambahkan satu tahun ke tanggal registrasi
+                    var birthdate = new Date(registrationDate);
+                    birthdate.setFullYear(birthdate.getFullYear() + 1);
+
+                    // Format tanggal ke string sesuai format input (d-m-Y)
+                    var birthYear = birthdate.getFullYear();
+                    var birthMonth = ('0' + (birthdate.getMonth() + 1)).slice(-2); // Bulan dimulai dari 0
+                    var birthDay = ('0' + birthdate.getDate()).slice(-2);
+
+                    var formattedBirthdate = birthDay + '-' + birthMonth + '-' + birthYear;
+
+                    // Menetapkan nilai elemen dengan id "birthdate"
+                    document.getElementById('birthdate').value = formattedBirthdate;
+                });
             });
         </script>
     @endpush

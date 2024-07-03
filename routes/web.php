@@ -46,7 +46,6 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::patch('/admin/reservation/update/{reservation}', [ReservationController::class, 'update'])->name('reservation.update');
     Route::get('/admin/reservation/show/{reservation}', [ReservationController::class, 'show'])->name('reservation.show');
     Route::delete('/admin/reservation/delete/{reservation}', [ReservationController::class, 'destroy'])->name('reservation.destroy');
-    Route::get('/admin/reservation/delete/{reservation}', [ReservationController::class, 'destroy'])->name('reservation.destroy');
     Route::get('/admin/reservation/upload', [ReservationController::class, 'uploadForm'])->name('reservation.upload');
     Route::post('/admin/reservation/import', [ReservationController::class, 'import'])->name('reservation.import');
 

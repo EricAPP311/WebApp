@@ -20,13 +20,11 @@ class HomeController extends Controller
         $lastRegister = Reservation::orderBy('registration_date', 'DESC')->limit(4)->get();
         $recentBirthday = Reservation::orderBy('birthdate', 'DESC')->limit(6)->get();
         $upcomming = $services->getBirthday();
-        // dd($upcomming['threeMonths']);
         return view('landing-page.home', compact('data', 'lastRegisChart', 'lastRegister', 'recentBirthday', 'upcomming'));
     }
 
     public function reloadCaptcha()
     {
-        // dd(captcha_img());
-        return response()->json(['captcha' => captcha_img()]);
+        return response()->json(['captcha' => captcha_img('flat')]);
     }
 }

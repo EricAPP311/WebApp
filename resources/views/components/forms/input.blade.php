@@ -80,9 +80,9 @@
                             </div>
                             <div class="form-group mb-3">
                                 <label for="birthdate">Date d'anniversaire</label>
-                                <input type="text" name="birthdate"
+                                <input type="text" name="birthdate" id="birthdate"
                                     class="form-control flatpickr datepicker @error('birthdate') is-invalid @enderror"
-                                    placeholder="dd-MM-yyyy" value="{{ old('birthdate') }}">
+                                    placeholder="dd-MM-yyyy" value="{{ old('birthdate') }}" style="text-align:left">
                                 @error('birthdate')
                                     <div class="invalid-feedback">
                                         <small>
@@ -95,10 +95,10 @@
                         <div class="col-md-6">
                             <div class="form-group mb-3">
                                 <label for="registration_date">Jour de réservation</label>
-                                <input type="text" name="registration_date"
+                                <input type="text" name="registration_date" id="registration_date"
                                     class="form-control flatpickr datetimepicker @error('registration_date') is-invalid @enderror"
                                     placeholder="dd-MM-yyyy HH:mm:ss" value="{{ old('registration_date') }}"
-                                    style="text-align: left">
+                                    style="text-align:left">
                                 @error('registration_date')
                                     <div class="invalid-feedback">
                                         <small>
@@ -126,9 +126,13 @@
                                 <label for="reservation_type">Type de réservation</label>
                                 <select name="reservation_type" id="reservation_type"
                                     class="form-control @error('reservation_type') is-invalid @enderror">
-                                    <option value="" selected>Sélectionnez-en un</option>
-                                    <option value="Phone">Phone</option>
-                                    <option value="Website">Website</option>
+                                    <option value="" {{ old('reservation_type') == null ? 'selected' : '' }}>
+                                        Sélectionnez-en un</option>
+                                    <option value="Phone" {{ old('reservation_type') == 'Phone' ? 'selected' : '' }}>
+                                        Phone</option>
+                                    <option value="Website"
+                                        {{ old('reservation_type') == 'Website' ? 'selected' : '' }}>
+                                        Website</option>
                                 </select>
                                 @error('reservation_type')
                                     <div class="invalid-feedback">
@@ -141,7 +145,7 @@
                             <div class="form-group mb-3">
                                 <label for="exampleFormControlTextarea1">Notes de réservation</label>
                                 <textarea name="notes" id="exampleFormControlTextarea1" class="form-control @error('notes') is-invalid @enderror"
-                                    rows="3" placeholder="Entrez des notes ici.">
+                                    rows="3" placeholder="Entrez des notes ici." style="text-align:left">
                                     {{ old('notes') }}
                                 </textarea>
                                 @error('notes')
@@ -155,9 +159,9 @@
                         </div>
                     </div>
                     <div class="form-group mt-3">
-                        <div class="col-md-6">
+                        <div class="col-md-8">
                             <div class="captcha mb-2">
-                                <span>{!! captcha_img() !!}</span>
+                                <span>{!! captcha_img('flat') !!}</span>
                                 <button type="button" class="btn btn-danger" class="reload" id="reload">
                                     &#x21bb;
                                 </button>

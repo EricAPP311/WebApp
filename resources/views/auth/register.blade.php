@@ -9,8 +9,7 @@
                     <div class="col-lg-5 text-center mx-auto">
                         <div class="mb-2 mt-2">
                             <a href="{{ route('landing.home') }}" role="button">
-                                <img src="{{ asset('assets/landing') }}/img/brand/artech-white.png" style="width: 100%;"
-                                    alt="image brand">
+                                <img src="{{ asset('assets') }}/img/logo.png" style="width: 45%;" alt="image brand">
                             </a>
                         </div>
                         <p class="text-lead text-white">Sign up now to unlock the full potential of Artech Design HubCenter

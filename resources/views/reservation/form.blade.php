@@ -7,7 +7,7 @@
                 <div class="col-12">
                     <div class="card mb-4">
                         <div class="card-header pb-0">
-                            <h6>Form {{ $title }}</h6>
+                            <h6>Formulaire</h6>
                         </div>
                         <div class="card-body">
                             <form
@@ -24,7 +24,7 @@
                                                 <div class="row">
                                                     <div class="col-md-5 me-md-4">
                                                         <div class="row mb-3">
-                                                            <label for="first_name">First Name</label>
+                                                            <label for="first_name">Prenom</label>
                                                             <input type="text" name="first_name"
                                                                 class="form-control @error('first_name') is-invalid @enderror"
                                                                 placeholder="Entrez ici votre prénom."
@@ -40,7 +40,7 @@
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="row mb-3">
-                                                            <label for="last_name">Last Name</label>
+                                                            <label for="last_name">Nom</label>
                                                             <input type="text" name="last_name"
                                                                 class="form-control @error('last_name') is-invalid @enderror"
                                                                 placeholder="Entrez le nom de famille ici."
@@ -86,13 +86,12 @@
                                             @enderror
                                         </div>
                                         <div class="row mb-3">
-                                            <label for="registration_date">Jour de réservation</label>
-                                            <input
-                                                class="flatpickr datetimepicker form-control @error('registration_date') is-invalid @enderror"
-                                                type="text" placeholder="dd-MM-yyyy HH:mm:ss"
-                                                name="registration_date"
-                                                value="{{ isset($reservation->registration_date) ? date('d-m-Y H:i:s', strtotime($reservation->registration_date)) : old('registration_date') }}">
-                                            @error('registration_date')
+                                            <label for="birthdate">Date d'anniversaire</label>
+                                            <input type="text" name="birthdate"
+                                                class="form-control flatpickr datepicker @error('birthdate') is-invalid @enderror"
+                                                placeholder="dd-MM-yyyy"
+                                                value="{{ isset($reservation->birthdate) ? date('d-m-Y', strtotime($reservation->birthdate)) : old('birthdate') }}">
+                                            @error('birthdate')
                                                 <div class="invalid-feedback">
                                                     <small>
                                                         {{ $message }}
@@ -103,12 +102,13 @@
                                     </div>
                                     <div class="col-md-5">
                                         <div class="row mb-3">
-                                            <label for="birthdate">Date d'anniversaire</label>
-                                            <input type="text" name="birthdate"
-                                                class="form-control flatpickr datepicker @error('birthdate') is-invalid @enderror"
-                                                placeholder="dd-MM-yyyy"
-                                                value="{{ isset($reservation->birthdate) ? date('d-m-Y', strtotime($reservation->birthdate)) : old('birthdate') }}">
-                                            @error('birthdate')
+                                            <label for="registration_date">Jour de réservation</label>
+                                            <input
+                                                class="flatpickr datetimepicker form-control @error('registration_date') is-invalid @enderror"
+                                                type="text" placeholder="dd-MM-yyyy HH:mm:ss"
+                                                name="registration_date"
+                                                value="{{ isset($reservation->registration_date) ? date('d-m-Y H:i:s', strtotime($reservation->registration_date)) : old('registration_date') }}">
+                                            @error('registration_date')
                                                 <div class="invalid-feedback">
                                                     <small>
                                                         {{ $message }}
@@ -132,7 +132,7 @@
                                             @enderror
                                         </div>
                                         <div class="row mb-3">
-                                            <label for="reservation_type">Reservation Type</label>
+                                            <label for="reservation_type">Type de réservation</label>
                                             <select name="reservation_type" id="reservation_type"
                                                 class="form-control @error('reservation_type') is-invalid @enderror">
                                                 @if (empty($reservation))
@@ -158,7 +158,7 @@
                                             @enderror
                                         </div>
                                         <div class="row mb-3">
-                                            <label for="exampleFormControlTextarea1">Notes</label>
+                                            <label for="exampleFormControlTextarea1">Notes de réservation</label>
                                             <textarea name="notes" id="exampleFormControlTextarea1" class="form-control @error('notes') is-invalid @enderror"
                                                 rows="3" placeholder="Entrez des notes ici.">
                                                 {{ $reservation->notes ?? old('notes') }}

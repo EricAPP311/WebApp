@@ -65,10 +65,10 @@
                                 style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/signin-ill.jpg');
       background-size: cover;">
                                 <span class="mask bg-gradient-primary opacity-6"></span>
-                                <div class="mt-5 mb-3">
+                                <div class="mt-5 mb-0">
                                     <a href="{{ route('landing.home') }}" role="button">
-                                        <img src="{{ asset('assets/landing') }}/img/brand/artech-white.png"
-                                            style="width: 100%;" alt="image brand" class="bg-gradient-primary opacity-6">
+                                        <img src="{{ asset('assets') }}/img/logo.png" style="width:40%; height:75%"
+                                            alt="image brand" class="bg-white opacity-6 border-radius-top-start-xxl-2xl">
                                     </a>
                                 </div>
                                 <p class="text-white position-relative">Please log in to access Artech Design HubCenter and

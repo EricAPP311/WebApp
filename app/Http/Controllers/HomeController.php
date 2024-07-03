@@ -23,4 +23,10 @@ class HomeController extends Controller
         // dd($upcomming['threeMonths']);
         return view('landing-page.home', compact('data', 'lastRegisChart', 'lastRegister', 'recentBirthday', 'upcomming'));
     }
+
+    public function reloadCaptcha()
+    {
+        // dd(captcha_img());
+        return response()->json(['captcha' => captcha_img()]);
+    }
 }

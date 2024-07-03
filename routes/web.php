@@ -31,13 +31,11 @@ Route::get('common', function () {
     return redirect()->route('login');
 })->name('common');
 
-// Route::get('/', function () {
-//     return view('landing-page.home');
-// });
 Route::get('/', [HomeController::class, 'index'])->name('landing.home');
 Route::get('/admin/login', [AuthenticatedSessionController::class, 'create'])->name('admin.login');
 Route::get('/reservation', [ReservationController::class, 'landing'])->name('landing.reservation');
-Route::post('/reservation/store', [ReservationController::class, 'store'])->name('landing.reservation-store');
+Route::post('/reservation/store', [ReservationController::class, 'storeHome'])->name('landing.reservation-store');
+Route::get('/reload-captcha', [HomeController::class, 'reloadCaptcha'])->name('reload-captcha');
 
 Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('dashboard');

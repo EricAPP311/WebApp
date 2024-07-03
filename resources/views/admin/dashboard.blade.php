@@ -206,9 +206,9 @@
                                             </div>
                                         </div>
                                         <div class="d-flex">
-                                            <button
+                                            <a type="button" href="{{ route('reservation.edit', $reg->id) }}"
                                                 class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"><i
-                                                    class="ni ni-bold-right" aria-hidden="true"></i></button>
+                                                    class="ni ni-bold-right" aria-hidden="true"></i></a>
                                         </div>
                                     </li>
                                 @endforeach
@@ -348,9 +348,9 @@
                                             </div>
                                         </div>
                                         <div class="d-flex">
-                                            <button
-                                                class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"><i
-                                                    class="ni ni-bold-right" aria-hidden="true"></i></button>
+                                            <a class="btn btn-link btn-icon-only btn-rounded btn-sm text-dark icon-move-right my-auto"
+                                                href="{{ route('reservation.edit', $item->id) }}" type="button"><i
+                                                    class="ni ni-bold-right" aria-hidden="true"></i></a>
                                         </div>
                                     </li>
                                 @endforeach

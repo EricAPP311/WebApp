@@ -81,7 +81,7 @@
                             <div class="form-group mb-3">
                                 <label for="birthdate">Date d'anniversaire</label>
                                 <input type="text" name="birthdate" id="birthdate"
-                                    class="form-control flatpickr datepicker @error('birthdate') is-invalid @enderror"
+                                    class="form-control datepicker @error('birthdate') is-invalid @enderror"
                                     placeholder="dd-MM-yyyy" value="{{ old('birthdate') }}" style="text-align:left">
                                 @error('birthdate')
                                     <div class="invalid-feedback">
@@ -96,7 +96,7 @@
                             <div class="form-group mb-3">
                                 <label for="registration_date">Jour de réservation</label>
                                 <input type="text" name="registration_date" id="registration_date"
-                                    class="form-control flatpickr datetimepicker @error('registration_date') is-invalid @enderror"
+                                    class="form-control datetimepicker @error('registration_date') is-invalid @enderror"
                                     placeholder="dd-MM-yyyy HH:mm:ss" value="{{ old('registration_date') }}"
                                     style="text-align:left">
                                 @error('registration_date')
@@ -158,7 +158,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group mt-3">
+                    {{-- <div class="form-group mt-3">
                         <div class="col-md-8">
                             <div class="captcha mb-2">
                                 <span>{!! captcha_img('flat') !!}</span>
@@ -177,7 +177,7 @@
                                 </div>
                             @enderror
                         </div>
-                    </div>
+                    </div> --}}
                     <div class="form-group mt-3">
                         <div class="d-flex">
                             <button class="btn btn-secondary btn-sm ms-auto me-2"

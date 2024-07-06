@@ -53,8 +53,8 @@ Coded by www.creative-tim.com
     <script src="{{ asset('assets/landing') }}/js/plugins/bootstrap-switch.js"></script>
     <script src="{{ asset('assets/landing') }}/js/plugins/nouislider.min.js" type="text/javascript"></script>
     <script src="{{ asset('assets/landing') }}/js/plugins/moment.min.js"></script>
-    <script src="{{ asset('assets/landing') }}/js/plugins/datetimepicker.js" type="text/javascript"></script>
-    <script src="{{ asset('assets/landing') }}/js/plugins/bootstrap-datepicker.min.js"></script>
+    {{-- <script src="{{ asset('assets/landing') }}/js/plugins/datetimepicker.js" type="text/javascript"></script>
+    <script src="{{ asset('assets/landing') }}/js/plugins/bootstrap-datepicker.min.js"></script> --}}
     <!-- Control Center for Argon UI Kit: parallax effects, scripts for the example pages etc -->
     <!--  Google Maps Plugin    -->
     <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>

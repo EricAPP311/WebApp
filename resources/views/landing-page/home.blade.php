@@ -1,5 +1,8 @@
 @extends('layouts.landing.common')
 @section('title', 'Home')
+@push('style')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+@endpush
 @section('content')
     <div class="wrapper">
         <div class="section section-hero section-shaped">
@@ -44,26 +47,43 @@
     </div>
 @endsection
 @push('script')
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
         flatpickr('.datetimepicker', {
             enableTime: true,
-            dateFormat: "d-m-Y H:i:s",
+            dateFormat: "d-m-Y H:i:S",
+            time_24hr: true,
+            allowInput: true,
+            // altInput: true,
+            altFormat: "d-m-Y H:i:S",
+            onReady: function(selectedDates, dateStr, instance) {
+                if (!dateStr) {
+                    instance._input.setAttribute("placeholder", "dd-MM-yyyy HH:mm:ss");
+                }
+            }
         });
 
         flatpickr('.datepicker', {
-            // enableTime: true,
             dateFormat: "d-m-Y",
+            allowInput: true,
+            // altInput: true,
+            altFormat: "d-m-Y",
+            onReady: function(selectedDates, dateStr, instance) {
+                if (!dateStr) {
+                    instance._input.setAttribute("placeholder", "dd-MM-yyyy");
+                }
+            }
         });
 
-        $('#reload').click(function() {
-            $.ajax({
-                type: 'GET',
-                url: '{{ route('reload-captcha') }}',
-                success: function(data) {
-                    $(".captcha span").html(data.captcha);
-                }
-            });
-        });
+        // $('#reload').click(function() {
+        //     $.ajax({
+        //         type: 'GET',
+        //         url: '{{ route('reload-captcha') }}',
+        //         success: function(data) {
+        //             $(".captcha span").html(data.captcha);
+        //         }
+        //     });
+        // });
 
         $(document).ready(function() {
             $('#registration_date').on('input', function() {

@@ -33,7 +33,7 @@ class HomeReservationRequest extends FormRequest
             'birthdate' => 'required',
             'bookings_number_la_montagne' => 'required',
             'reservation_type' => 'required',
-            'captcha' => 'required',
+            // 'captcha' => 'required',
         ];
     }
 
@@ -49,7 +49,7 @@ class HomeReservationRequest extends FormRequest
             'birthdate.required' => 'Le champ anniversaire est obligatoire.',
             'bookings_number_la_montagne.required' => 'Le champ nombre de personnes est obligatoire.',
             'reservation_type.required' => 'Le champ type de réservation est obligatoire.',
-            'captcha.required' => 'Le champ captcha est obligatoire.',
+            // 'captcha.required' => 'Le champ captcha est obligatoire.',
             // 'captcha.captcha' => 'Valeur captcha invalide.'
         ];
     }
